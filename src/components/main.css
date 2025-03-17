@@ -45,9 +45,25 @@
     text-align: center;
     box-shadow: 6px 6px 10px 2px rgba(0, 0, 0, 0.6);
     opacity: 1;
-    transition: opacity 0.6s ease-in-out;
+    transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
   }
-  
+  .card-active {
+    animation: cardOpen 0.6s ease-in-out forwards;
+  }
+  @keyframes cardOpen {
+    0% {
+      transform: scale(0.9);
+      opacity: 0.8;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
   .card-open {
     opacity: 1;
   }

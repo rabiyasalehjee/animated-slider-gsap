@@ -15,34 +15,37 @@ const cardData = [
 ];
 
 const Main = () => {
-  const [backgroundImage, setBackgroundImage] = useState(img5); // Initial background
-  const [cards, setCards] = useState(cardData); // Initial card order
+  const [backgroundImage, setBackgroundImage] = useState(img5); 
+  const [cards, setCards] = useState(cardData);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [activeCardId, setActiveCardId] = useState(cardData[4].id); 
 
   useEffect(() => {
-    // Initial load animation
+    
     setTimeout(() => {
       setIsLoaded(true);
     }, 500);
 
     const interval = setInterval(() => {
-      // Update the background image to the first card's image BEFORE the transition
+     
       setBackgroundImage(cards[0].image);
+      setActiveCardId(cards[0].id); 
 
-      // After a short delay, update the card order
+     
       setTimeout(() => {
         setCards((prevCards) => {
           const newCards = [...prevCards.slice(1), prevCards[0]];
           return newCards;
         });
-      }, 500); // Adjust this delay to match the transition duration
+      }, 500); 
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [cards]); // Add `cards` as a dependency
+  }, [cards]); 
 
-  const handleCardClick = (image) => {
+  const handleCardClick = (image, id) => {
     setBackgroundImage(image);
+    setActiveCardId(id); 
   };
 
   return (
@@ -54,8 +57,8 @@ const Main = () => {
             {cards.map((card, index) => (
               <div
                 key={card.id}
-                className={`card ${isLoaded ? 'card-open' : ''}`}
-                onClick={() => handleCardClick(card.image)}
+                className={`card ${isLoaded ? 'card-open' : ''} ${activeCardId === card.id ? 'card-active' : ''}`}
+                onClick={() => handleCardClick(card.image, card.id)}
                 style={{ backgroundImage: `url(${card.image})` }}
               >
                 <img src={card.image} alt={card.title} />
