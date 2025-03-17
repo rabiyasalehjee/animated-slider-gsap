@@ -15,25 +15,31 @@ const cardData = [
 ];
 
 const Main = () => {
-  const [backgroundImage, setBackgroundImage] = useState(cardData[0].image);
+  const [backgroundImage, setBackgroundImage] = useState(img5); // Initial background
+  const [cards, setCards] = useState(cardData); // Initial card order
   const [isLoaded, setIsLoaded] = useState(false);
-  const [cards, setCards] = useState(cardData);
 
   useEffect(() => {
+    // Initial load animation
     setTimeout(() => {
       setIsLoaded(true);
     }, 500);
 
     const interval = setInterval(() => {
-      setCards((prevCards) => {
-        const newCards = [...prevCards.slice(1), prevCards[0]];
-        setBackgroundImage(newCards[0].image);
-        return newCards;
-      });
+      // Update the background image to the first card's image BEFORE the transition
+      setBackgroundImage(cards[0].image);
+
+      // After a short delay, update the card order
+      setTimeout(() => {
+        setCards((prevCards) => {
+          const newCards = [...prevCards.slice(1), prevCards[0]];
+          return newCards;
+        });
+      }, 500); // Adjust this delay to match the transition duration
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [cards]); // Add `cards` as a dependency
 
   const handleCardClick = (image) => {
     setBackgroundImage(image);
@@ -44,12 +50,13 @@ const Main = () => {
       <div className="left-column"></div>
       <div className="right-column">
         <div className="card-slider">
-          <div className="card-slider-wrapper" style={{ transform: `translateX(${isLoaded ? '0' : '100%'})` }}>
+          <div className="card-slider-wrapper">
             {cards.map((card, index) => (
               <div
                 key={card.id}
-                className={`card ${isLoaded ? 'card-open' : ''} ${index === 0 && isLoaded ? 'card-zoom' : ''}`}
+                className={`card ${isLoaded ? 'card-open' : ''}`}
                 onClick={() => handleCardClick(card.image)}
+                style={{ backgroundImage: `url(${card.image})` }}
               >
                 <img src={card.image} alt={card.title} />
                 <h3>{card.title}</h3>
