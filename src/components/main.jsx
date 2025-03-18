@@ -52,13 +52,15 @@ const Main = () => {
 
     let order = [0, 1, 2, 3, 4];
     let detailsEven = true;
-    let offsetTop = 200;
-    let offsetLeft = 700;
-    let cardWidth = 200;
+    let offsetTop;
+    let offsetLeft;
+    let cardWidth;
     let cardHeight = 300;
     let gap = 40;
     let numberSize = 50;
     const ease = "sine.inOut";
+
+    const isMobile = () => window.innerWidth <= 768;
 
     const getCard = (index) => `#card${index}`;
     const getCardContent = (index) => `#card-content-${index}`;
@@ -79,12 +81,14 @@ const Main = () => {
       const detailsActive = detailsEven ? "#details-even" : "#details-odd";
       const detailsInactive = detailsEven ? "#details-odd" : "#details-even";
       const { innerHeight: height, innerWidth: width } = window;
-      offsetTop = height - 430;
-      offsetLeft = width - 830;
+
+      offsetTop = height - (isMobile() ? 300 : 430);
+      offsetLeft = isMobile() ? 0 : width - 830;
+      cardWidth = isMobile() ? width / 2 : 200;
 
       gsap.set("#pagination", {
-        top: offsetTop + 330,
-        left: offsetLeft,
+        top: offsetTop + (isMobile() ? 200 : 330),
+        left: isMobile() ? width - 200 : offsetLeft,
         y: 200,
         opacity: 0,
         zIndex: 60,
@@ -93,8 +97,8 @@ const Main = () => {
       gsap.set(getCard(active), {
         x: 0,
         y: 0,
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: width,
+        height: height,
       });
       gsap.set(getCardContent(active), { x: 0, y: 0, opacity: 0 });
       gsap.set(detailsActive, { opacity: 0, zIndex: 22, x: -200 });
@@ -106,12 +110,12 @@ const Main = () => {
       gsap.set(`${detailsInactive} .cta`, { y: 60 });
 
       gsap.set(".progress-sub-foreground", {
-        width: 500 * (1 / order.length) * (active + 1),
+        width: (isMobile() ? 200 : 500) * (1 / order.length) * (active + 1),
       });
 
       rest.forEach((i, index) => {
         gsap.set(getCard(i), {
-          x: offsetLeft + 400 + index * (cardWidth + gap),
+          x: offsetLeft + (isMobile() ? width : 400) + index * (cardWidth + gap),
           y: offsetTop,
           width: cardWidth,
           height: cardHeight,
@@ -119,14 +123,14 @@ const Main = () => {
           borderRadius: 10,
         });
         gsap.set(getCardContent(i), {
-          x: offsetLeft + 400 + index * (cardWidth + gap),
+          x: offsetLeft + (isMobile() ? width : 400) + index * (cardWidth + gap),
           zIndex: 40,
           y: offsetTop + cardHeight - 100,
         });
         gsap.set(getSliderItem(i), { x: (index + 1) * numberSize });
       });
 
-      gsap.set(".indicator", { x: -window.innerWidth });
+      gsap.set(".indicator", { x: -width });
 
       const startDelay = 0.6;
 
@@ -142,14 +146,14 @@ const Main = () => {
       });
       rest.forEach((i, index) => {
         gsap.to(getCard(i), {
-          x: offsetLeft + index * (cardWidth + gap),
+          x: offsetLeft + (isMobile() ? (index === 0 ? width : width + cardWidth + gap * index) : index * (cardWidth + gap)),
           zIndex: 30,
           delay: 0.05 * index,
           ease,
           delay: startDelay,
         });
         gsap.to(getCardContent(i), {
-          x: offsetLeft + index * (cardWidth + gap),
+          x: offsetLeft + (isMobile() ? (index === 0 ? width : width + cardWidth + gap * index) : index * (cardWidth + gap)),
           zIndex: 40,
           delay: 0.05 * index,
           ease,
@@ -187,6 +191,7 @@ const Main = () => {
 
         const [active, ...rest] = order;
         const prv = rest[rest.length - 1];
+        const { innerWidth: width } = window;
 
         gsap.set(getCard(prv), { zIndex: 10 });
         gsap.set(getCard(active), { zIndex: 20 });
@@ -195,7 +200,7 @@ const Main = () => {
         gsap.to(getCardContent(active), { y: offsetTop + cardHeight - 10, opacity: 0, duration: 0.3, ease });
         gsap.to(getSliderItem(active), { x: 0, ease });
         gsap.to(getSliderItem(prv), { x: -numberSize, ease });
-        gsap.to(".progress-sub-foreground", { width: 500 * (1 / order.length) * (active + 1), ease });
+        gsap.to(".progress-sub-foreground", { width: (isMobile() ? 200 : 500) * (1 / order.length) * (active + 1), ease });
 
         gsap.to(getCard(active), {
           x: 0,
@@ -205,7 +210,7 @@ const Main = () => {
           height: window.innerHeight,
           borderRadius: 0,
           onComplete: () => {
-            const xNew = offsetLeft + (rest.length - 1) * (cardWidth + gap);
+            const xNew = offsetLeft + (isMobile() ? (rest.length === 1 ? width : width + cardWidth) : (rest.length - 1) * (cardWidth + gap));
             gsap.set(getCard(prv), { x: xNew, y: offsetTop, width: cardWidth, height: cardHeight, zIndex: 30, borderRadius: 10, scale: 1 });
             gsap.set(getCardContent(prv), { x: xNew, y: offsetTop + cardHeight - 100, opacity: 1, zIndex: 40 });
             gsap.set(getSliderItem(prv), { x: rest.length * numberSize });
@@ -223,7 +228,7 @@ const Main = () => {
 
         rest.forEach((i, index) => {
           if (i !== prv) {
-            const xNew = offsetLeft + index * (cardWidth + gap);
+            const xNew = offsetLeft + (isMobile() ? (index === 0 ? width : width + cardWidth + gap * index) : index * (cardWidth + gap));
             gsap.set(getCard(i), { zIndex: 30 });
             gsap.to(getCard(i), { x: xNew, y: offsetTop, width: cardWidth, height: cardHeight, ease, delay: 0.1 * (index + 1) });
             gsap.to(getCardContent(i), { x: xNew, y: offsetTop + cardHeight - 100, opacity: 1, zIndex: 40, ease, delay: 0.1 * (index + 1) });
@@ -259,12 +264,17 @@ const Main = () => {
       try {
         await loadImages();
         init();
+        window.addEventListener('resize', init); // Re-run init on resize
       } catch (error) {
         console.error("One or more images failed to load", error);
       }
     };
 
     start();
+
+    return () => {
+      window.removeEventListener('resize', init); // Cleanup
+    };
   }, []);
 
   return (
@@ -286,7 +296,7 @@ const Main = () => {
 
       <div className="details" id="details-even">
         <div className="place-box">
-          <div className="text">Yellowstone National Park, Wyoming</div>
+          <div className="text">Yellowstone National Park</div>
         </div>
         <div className="title-box-1"><div className="title-1">BLACK SAND</div></div>
         <div className="title-box-2"><div className="title-2">BASIN</div></div>
@@ -300,7 +310,7 @@ const Main = () => {
 
       <div className="details" id="details-odd">
         <div className="place-box">
-          <div className="text">Yellowstone National Park, Wyoming</div>
+          <div className="text">Yellowstone National Park</div>
         </div>
         <div className="title-box-1"><div className="title-1">BLACK SAND</div></div>
         <div className="title-box-2"><div className="title-2">BASIN</div></div>
