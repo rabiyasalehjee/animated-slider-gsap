@@ -2,57 +2,56 @@ import React, { useEffect } from 'react';
 import gsap from 'gsap';
 import './main.css';
 
-// Images
-import img1 from '../assets/img1.jpg';
-import img2 from '../assets/img2.jpg';
-import img3 from '../assets/img3.jpg';
-import img4 from '../assets/img4.jpg';
-import img5 from '../assets/img5.jpg';
+import img1 from '../assets/img1.jpg'; 
+import img2 from '../assets/img2.jpg'; 
+import img3 from '../assets/img3.jpg'; 
+import img4 from '../assets/img4.jpg'; 
+import img5 from '../assets/img5.jpg';  
 
-// Assuming you have 6 images named img1.jpg to img6.jpg in src/assets/
-const data = [
-  {
-    place: 'Switzerland Alps',
-    title: 'SAINT',
-    title2: 'ANTONIEN',
-    description: 'Tucked away in the Switzerland Alps, Saint Antönien offers an idyllic retreat for those seeking tranquility and adventure alike. It\'s a hidden gem for backcountry skiing in winter and boasts lush trails for hiking and mountain biking during the warmer months.',
-    image: img1,
-  },
-  {
-    place: 'Japan Alps',
-    title: 'NANGANO',
-    title2: 'PREFECTURE',
-    description: 'Nagano Prefecture, set within the majestic Japan Alps, is a cultural treasure trove with its historic shrines and temples, particularly the famous Zenkō-ji. The region is also a hotspot for skiing and snowboarding, offering some of the country\'s best powder.',
-    image: img2,
-  },
-  {
-    place: 'Sahara Desert - Morocco',
-    title: 'MARRAKECH',
-    title2: 'MEROUGA',
-    description: 'The journey from the vibrant souks and palaces of Marrakech to the tranquil, starlit sands of Merzouga showcases the diverse splendor of Morocco. Camel treks and desert camps offer an unforgettable immersion into the nomadic way of life.',
-    image: img3,
-  },
-  {
-    place: 'Sierra Nevada - USA',
-    title: 'YOSEMITE',
-    title2: 'NATIONAL PARK',
-    description: 'Yosemite National Park is a showcase of the American wilderness, revered for its towering granite monoliths, ancient giant sequoias, and thundering waterfalls. The park offers year-round recreational activities, from rock climbing to serene valley walks.',
-    image: img4,
-  },
-  {
-    place: 'Tarifa - Spain',
-    title: 'LOS LANCES',
-    title2: 'BEACH',
-    description: 'Los Lances Beach in Tarifa is a coastal paradise known for its consistent winds, making it a world-renowned spot for kitesurfing and windsurfing. The beach\'s long, sandy shores provide ample space for relaxation and sunbathing, with a vibrant atmosphere of beach bars and cafes.',
-    image: img5,
-  },
+const data = [   
+  {     
+    place: 'Yellowstone National Park, Wyoming',     
+    title: 'BLACK SAND',     
+    title2: 'BASIN',     
+    description: 'Black Sand Basin in Yellowstone National Park, Wyoming, is a stunning geothermal area known for its vibrant hot springs, geysers, and steaming pools. The contrast of dark volcanic sand with the colorful thermal waters creates a mesmerizing landscape.',     
+    image: img1,   
+  },   
+  {     
+    place: 'Yosemite National Park, USA',     
+    title: 'SENTINEL',     
+    title2: 'DOME',     
+    description: 'Sentinel Dome in Yosemite National Park offers breathtaking panoramic views of the surrounding valley, including El Capitan and Half Dome. A relatively short hike rewards visitors with one of the most iconic vistas in the park.',     
+    image: img2,   
+  },   
+  {     
+    place: 'Bryce Canyon National Park, USA',     
+    title: 'STONE',     
+    title2: 'GATE',     
+    description: 'The Stone Gate in Bryce Canyon National Park stands as a natural rock formation, framing the breathtaking hoodoos and red rock amphitheaters that make this park a geological wonder.',     
+    image: img3,   
+  },   
+  {     
+    place: 'Durdle Door, Dorset, England',     
+    title: 'DURDLE',     
+    title2: 'DOOR',     
+    description: 'Durdle Door, a magnificent limestone arch on the Jurassic Coast of Dorset, England, is one of the most photographed and iconic coastal landmarks in the UK. Its scenic beauty and clear blue waters make it a favorite destination for visitors.',     
+    image: img4,   
+  },   
+  {     
+    place: 'Piha Beach, New Zealand',     
+    title: 'LION',     
+    title2: 'ROCK',     
+    description: 'Piha Beach, home to the striking Lion Rock, is a rugged black sand beach on New Zealand’s west coast. Popular among surfers and nature lovers, it offers dramatic coastal scenery and a deep cultural significance to the Māori people.',     
+    image: img5,   
+  }, 
 ];
+
 
 const Main = () => {
   useEffect(() => {
     const _ = (id) => document.getElementById(id);
 
-    let order = [0, 1, 2, 3, 4, 5];
+    let order = [0, 1, 2, 3, 4];
     let detailsEven = true;
     let offsetTop = 200;
     let offsetLeft = 700;
