@@ -23,13 +23,6 @@ body {
   box-shadow: 6px 6px 10px 2px rgba(0, 0, 0, 0.6);
 }
 
-#btn {
-  position: absolute;
-  top: 690px;
-  left: 16px;
-  z-index: 99;
-}
-
 .card-content {
   position: absolute;
   left: 0;
@@ -136,7 +129,7 @@ body {
   right: 0;
   top: 0;
   height: 5px;
-  zIndex: 60;
+  z-index: 60;
   background-color: var(--primary-color);
 }
 
@@ -217,7 +210,6 @@ body {
   z-index: 100;
 }
 
-/* Mobile Responsive Styles */
 @media (max-width: 768px) {
   .card {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
@@ -282,11 +274,15 @@ body {
     padding: 4px 16px;
   }
 
-  .pagination {
-    left: calc(100vw - 200px);
+  .pagination .progress-sub-container {
+    width: 150px;
   }
 
-  .pagination .progress-sub-container {
-    width: 100px;
+  .pagination .slide-numbers .item {
+    font-size: 24px;
+  }
+
+  .indicator {
+    height: 3px;
   }
 }

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import gsap from 'gsap';
 import './main.css';
-
 import img1 from '../assets/img1.jpg';
 import img2 from '../assets/img2.jpg';
 import img3 from '../assets/img3.jpg';
@@ -55,7 +54,7 @@ const Main = () => {
     let offsetTop;
     let offsetLeft;
     let cardWidth;
-    let cardHeight = 300;
+    let cardHeight;
     let gap = 40;
     let numberSize = 50;
     const ease = "sine.inOut";
@@ -83,12 +82,13 @@ const Main = () => {
       const { innerHeight: height, innerWidth: width } = window;
 
       offsetTop = height - (isMobile() ? 300 : 430);
-      offsetLeft = isMobile() ? 0 : width - 830;
-      cardWidth = isMobile() ? width / 2 : 200;
+      offsetLeft = width - (isMobile() ? 300 : 830);
+      cardWidth = isMobile() ? 100 : 200;
+      cardHeight = isMobile() ? 150 : 300;
 
       gsap.set("#pagination", {
-        top: offsetTop + (isMobile() ? 200 : 330),
-        left: isMobile() ? width - 200 : offsetLeft,
+        top: offsetTop + (isMobile() ? 220 : 330),
+        left: offsetLeft,
         y: 200,
         opacity: 0,
         zIndex: 60,
@@ -110,12 +110,12 @@ const Main = () => {
       gsap.set(`${detailsInactive} .cta`, { y: 60 });
 
       gsap.set(".progress-sub-foreground", {
-        width: (isMobile() ? 200 : 500) * (1 / order.length) * (active + 1),
+        width: (isMobile() ? 150 : 500) * (1 / order.length) * (active + 1),
       });
 
       rest.forEach((i, index) => {
         gsap.set(getCard(i), {
-          x: offsetLeft + (isMobile() ? width : 400) + index * (cardWidth + gap),
+          x: offsetLeft + 400 + index * (cardWidth + gap),
           y: offsetTop,
           width: cardWidth,
           height: cardHeight,
@@ -123,9 +123,9 @@ const Main = () => {
           borderRadius: 10,
         });
         gsap.set(getCardContent(i), {
-          x: offsetLeft + (isMobile() ? width : 400) + index * (cardWidth + gap),
+          x: offsetLeft + 400 + index * (cardWidth + gap),
           zIndex: 40,
-          y: offsetTop + cardHeight - 100,
+          y: offsetTop + cardHeight - (isMobile() ? 50 : 100),
         });
         gsap.set(getSliderItem(i), { x: (index + 1) * numberSize });
       });
@@ -146,14 +146,14 @@ const Main = () => {
       });
       rest.forEach((i, index) => {
         gsap.to(getCard(i), {
-          x: offsetLeft + (isMobile() ? (index === 0 ? width : width + cardWidth + gap * index) : index * (cardWidth + gap)),
+          x: offsetLeft + index * (cardWidth + gap),
           zIndex: 30,
           delay: 0.05 * index,
           ease,
           delay: startDelay,
         });
         gsap.to(getCardContent(i), {
-          x: offsetLeft + (isMobile() ? (index === 0 ? width : width + cardWidth + gap * index) : index * (cardWidth + gap)),
+          x: offsetLeft + index * (cardWidth + gap),
           zIndex: 40,
           delay: 0.05 * index,
           ease,
@@ -200,7 +200,7 @@ const Main = () => {
         gsap.to(getCardContent(active), { y: offsetTop + cardHeight - 10, opacity: 0, duration: 0.3, ease });
         gsap.to(getSliderItem(active), { x: 0, ease });
         gsap.to(getSliderItem(prv), { x: -numberSize, ease });
-        gsap.to(".progress-sub-foreground", { width: (isMobile() ? 200 : 500) * (1 / order.length) * (active + 1), ease });
+        gsap.to(".progress-sub-foreground", { width: (isMobile() ? 150 : 500) * (1 / order.length) * (active + 1), ease });
 
         gsap.to(getCard(active), {
           x: 0,
@@ -210,9 +210,9 @@ const Main = () => {
           height: window.innerHeight,
           borderRadius: 0,
           onComplete: () => {
-            const xNew = offsetLeft + (isMobile() ? (rest.length === 1 ? width : width + cardWidth) : (rest.length - 1) * (cardWidth + gap));
+            const xNew = offsetLeft + (rest.length - 1) * (cardWidth + gap);
             gsap.set(getCard(prv), { x: xNew, y: offsetTop, width: cardWidth, height: cardHeight, zIndex: 30, borderRadius: 10, scale: 1 });
-            gsap.set(getCardContent(prv), { x: xNew, y: offsetTop + cardHeight - 100, opacity: 1, zIndex: 40 });
+            gsap.set(getCardContent(prv), { x: xNew, y: offsetTop + cardHeight - (isMobile() ? 50 : 100), opacity: 1, zIndex: 40 });
             gsap.set(getSliderItem(prv), { x: rest.length * numberSize });
 
             gsap.set(detailsInactive, { opacity: 0 });
@@ -228,10 +228,10 @@ const Main = () => {
 
         rest.forEach((i, index) => {
           if (i !== prv) {
-            const xNew = offsetLeft + (isMobile() ? (index === 0 ? width : width + cardWidth + gap * index) : index * (cardWidth + gap));
+            const xNew = offsetLeft + index * (cardWidth + gap);
             gsap.set(getCard(i), { zIndex: 30 });
             gsap.to(getCard(i), { x: xNew, y: offsetTop, width: cardWidth, height: cardHeight, ease, delay: 0.1 * (index + 1) });
-            gsap.to(getCardContent(i), { x: xNew, y: offsetTop + cardHeight - 100, opacity: 1, zIndex: 40, ease, delay: 0.1 * (index + 1) });
+            gsap.to(getCardContent(i), { x: xNew, y: offsetTop + cardHeight - (isMobile() ? 50 : 100), opacity: 1, zIndex: 40, ease, delay: 0.1 * (index + 1) });
             gsap.to(getSliderItem(i), { x: (index + 1) * numberSize, ease });
           }
         });
@@ -264,7 +264,7 @@ const Main = () => {
       try {
         await loadImages();
         init();
-        window.addEventListener('resize', init); // Re-run init on resize
+        window.addEventListener('resize', init);
       } catch (error) {
         console.error("One or more images failed to load", error);
       }
@@ -273,7 +273,7 @@ const Main = () => {
     start();
 
     return () => {
-      window.removeEventListener('resize', init); // Cleanup
+      window.removeEventListener('resize', init);
     };
   }, []);
 
