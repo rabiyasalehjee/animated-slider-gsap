@@ -211,6 +211,10 @@ body {
 }
 
 @media (max-width: 768px) {
+  body {
+    height: 100vh; /* Full viewport height */
+  }
+
   .card {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
   }
@@ -220,12 +224,13 @@ body {
   }
 
   .content-place {
-    font-size: 12px;
+    font-size: 10px;
+    margin-top: 4px;
   }
 
   .content-title-1,
   .content-title-2 {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .content-start {
@@ -234,13 +239,18 @@ body {
   }
 
   .details {
-    top: 150px;
+    top: 10px; /* Closer to top */
     left: 20px;
+    width: 90%;
+  }
+
+  .details .place-box {
+    height: 30px;
   }
 
   .details .place-box .text {
-    font-size: 16px;
-    padding-top: 12px;
+    font-size: 14px;
+    padding-top: 10px;
   }
 
   .details .place-box .text:before {
@@ -250,36 +260,74 @@ body {
 
   .details .title-1,
   .details .title-2 {
-    font-size: 48px;
+    font-size: 32px;
   }
 
   .details .title-box-1,
   .details .title-box-2 {
-    height: 70px;
+    height: 40px;
   }
 
   .details > .desc {
-    width: 90%;
-    font-size: 14px;
+    width: 100%;
+    font-size: 12px;
+    line-height: 1.2;
+    margin-top: 8px;
   }
 
   .details > .cta {
     width: 100%;
-    margin-top: 16px;
+    margin-top: 12px;
   }
 
   .details > .cta > .discover {
-    height: 32px;
-    font-size: 11px;
-    padding: 4px 16px;
+    height: 28px;
+    font-size: 10px;
+    padding: 4px 12px;
+  }
+
+  .pagination {
+    width: 90%;
+  }
+
+  .pagination > .arrow {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ffffff55;
+  }
+
+  .pagination > .arrow:nth-child(2) {
+    margin-left: 10px;
+  }
+
+  .pagination > .arrow svg {
+    width: 16px;
+    height: 16px;
   }
 
   .pagination .progress-sub-container {
-    width: 150px;
+    width: 40%; /* Smaller progress bar */
+    height: 30px;
+    margin-left: 12px;
+  }
+
+  .pagination .progress-sub-container .progress-sub-background {
+    height: 2px;
+  }
+
+  .pagination .progress-sub-container .progress-sub-background .progress-sub-foreground {
+    height: 2px;
+  }
+
+  .pagination .slide-numbers {
+    width: 30px;
+    height: 30px;
   }
 
   .pagination .slide-numbers .item {
-    font-size: 24px;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
   }
 
   .indicator {

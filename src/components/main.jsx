@@ -81,18 +81,41 @@ const Main = () => {
       const detailsInactive = detailsEven ? "#details-odd" : "#details-even";
       const { innerHeight: height, innerWidth: width } = window;
 
-      offsetTop = height - (isMobile() ? 300 : 430);
-      offsetLeft = width - (isMobile() ? 300 : 830);
-      cardWidth = isMobile() ? 100 : 200;
-      cardHeight = isMobile() ? 150 : 300;
+      // Mobile adjustments
+      if (isMobile()) {
+        offsetTop = height * 0.5; // Cards start at 50% of screen height
+        offsetLeft = width * 0.1; // 10% from left
+        cardWidth = width * 0.25; // Smaller cards (25% of width)
+        cardHeight = height * 0.3; // 30% of height
+        gap = 10; // Reduced gap for mobile
+        numberSize = 30; // Smaller number size for mobile
 
-      gsap.set("#pagination", {
-        top: offsetTop + (isMobile() ? 220 : 330),
-        left: offsetLeft,
-        y: 200,
-        opacity: 0,
-        zIndex: 60,
-      });
+        gsap.set("#pagination", {
+          top: height * 0.85, // Near bottom of screen
+          left: offsetLeft,
+          y: 0,
+          opacity: 1,
+          zIndex: 60,
+        });
+
+        gsap.set(detailsActive, { opacity: 0, zIndex: 22, x: -50 }); // Reduced offset for mobile
+      } else {
+        // Original desktop settings
+        offsetTop = height - 430;
+        offsetLeft = width - 830;
+        cardWidth = 200;
+        cardHeight = 300;
+
+        gsap.set("#pagination", {
+          top: offsetTop + 330,
+          left: offsetLeft,
+          y: 200,
+          opacity: 0,
+          zIndex: 60,
+        });
+
+        gsap.set(detailsActive, { opacity: 0, zIndex: 22, x: -200 });
+      }
 
       gsap.set(getCard(active), {
         x: 0,
@@ -101,7 +124,6 @@ const Main = () => {
         height: height,
       });
       gsap.set(getCardContent(active), { x: 0, y: 0, opacity: 0 });
-      gsap.set(detailsActive, { opacity: 0, zIndex: 22, x: -200 });
       gsap.set(detailsInactive, { opacity: 0, zIndex: 12 });
       gsap.set(`${detailsInactive} .text`, { y: 100 });
       gsap.set(`${detailsInactive} .title-1`, { y: 100 });
@@ -110,22 +132,22 @@ const Main = () => {
       gsap.set(`${detailsInactive} .cta`, { y: 60 });
 
       gsap.set(".progress-sub-foreground", {
-        width: (isMobile() ? 150 : 500) * (1 / order.length) * (active + 1),
+        width: (isMobile() ? width * 0.4 : 500) * (1 / order.length) * (active + 1),
       });
 
       rest.forEach((i, index) => {
         gsap.set(getCard(i), {
-          x: offsetLeft + 400 + index * (cardWidth + gap),
+          x: offsetLeft + (isMobile() ? index * (cardWidth + gap) : 400 + index * (cardWidth + gap)),
           y: offsetTop,
           width: cardWidth,
           height: cardHeight,
           zIndex: 30,
-          borderRadius: 10,
+          borderRadius: isMobile() ? 5 : 10,
         });
         gsap.set(getCardContent(i), {
-          x: offsetLeft + 400 + index * (cardWidth + gap),
+          x: offsetLeft + (isMobile() ? index * (cardWidth + gap) : 400 + index * (cardWidth + gap)),
           zIndex: 40,
-          y: offsetTop + cardHeight - (isMobile() ? 50 : 100),
+          y: offsetTop + cardHeight - (isMobile() ? 30 : 100),
         });
         gsap.set(getSliderItem(i), { x: (index + 1) * numberSize });
       });
@@ -135,7 +157,7 @@ const Main = () => {
       const startDelay = 0.6;
 
       gsap.to(".cover", {
-        x: width + 400,
+        x: width + (isMobile() ? 100 : 400),
         delay: 0.5,
         ease,
         onComplete: () => {
@@ -195,12 +217,12 @@ const Main = () => {
 
         gsap.set(getCard(prv), { zIndex: 10 });
         gsap.set(getCard(active), { zIndex: 20 });
-        gsap.to(getCard(prv), { scale: 1.5, ease });
+        gsap.to(getCard(prv), { scale: isMobile() ? 1.2 : 1.5, ease });
 
         gsap.to(getCardContent(active), { y: offsetTop + cardHeight - 10, opacity: 0, duration: 0.3, ease });
         gsap.to(getSliderItem(active), { x: 0, ease });
         gsap.to(getSliderItem(prv), { x: -numberSize, ease });
-        gsap.to(".progress-sub-foreground", { width: (isMobile() ? 150 : 500) * (1 / order.length) * (active + 1), ease });
+        gsap.to(".progress-sub-foreground", { width: (isMobile() ? width * 0.4 : 500) * (1 / order.length) * (active + 1), ease });
 
         gsap.to(getCard(active), {
           x: 0,
@@ -211,8 +233,8 @@ const Main = () => {
           borderRadius: 0,
           onComplete: () => {
             const xNew = offsetLeft + (rest.length - 1) * (cardWidth + gap);
-            gsap.set(getCard(prv), { x: xNew, y: offsetTop, width: cardWidth, height: cardHeight, zIndex: 30, borderRadius: 10, scale: 1 });
-            gsap.set(getCardContent(prv), { x: xNew, y: offsetTop + cardHeight - (isMobile() ? 50 : 100), opacity: 1, zIndex: 40 });
+            gsap.set(getCard(prv), { x: xNew, y: offsetTop, width: cardWidth, height: cardHeight, zIndex: 30, borderRadius: isMobile() ? 5 : 10, scale: 1 });
+            gsap.set(getCardContent(prv), { x: xNew, y: offsetTop + cardHeight - (isMobile() ? 30 : 100), opacity: 1, zIndex: 40 });
             gsap.set(getSliderItem(prv), { x: rest.length * numberSize });
 
             gsap.set(detailsInactive, { opacity: 0 });
@@ -231,7 +253,7 @@ const Main = () => {
             const xNew = offsetLeft + index * (cardWidth + gap);
             gsap.set(getCard(i), { zIndex: 30 });
             gsap.to(getCard(i), { x: xNew, y: offsetTop, width: cardWidth, height: cardHeight, ease, delay: 0.1 * (index + 1) });
-            gsap.to(getCardContent(i), { x: xNew, y: offsetTop + cardHeight - (isMobile() ? 50 : 100), opacity: 1, zIndex: 40, ease, delay: 0.1 * (index + 1) });
+            gsap.to(getCardContent(i), { x: xNew, y: offsetTop + cardHeight - (isMobile() ? 30 : 100), opacity: 1, zIndex: 40, ease, delay: 0.1 * (index + 1) });
             gsap.to(getSliderItem(i), { x: (index + 1) * numberSize, ease });
           }
         });
