@@ -112,21 +112,6 @@ body {
   align-items: center;
 }
 
-.details > .cta > .bookmark {
-  border: none;
-  background-color: var(--primary-color);
-  width: 36px;
-  height: 36px;
-  border-radius: 99px;
-  color: white;
-  display: grid;
-  place-items: center;
-}
-
-.details > .cta > .bookmark svg {
-  width: 20px;
-  height: 20px;
-}
 
 .details > .cta > .discover {
   border: 1px solid #ffffff;
@@ -136,10 +121,15 @@ body {
   color: #ffffff;
   padding: 4px 24px;
   font-size: 12px;
-  margin-left: 16px;
   text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.details > .cta > .discover:hover {
+  background-color: var(--primary-color);
+  color: #1a1a1a;
+}
 .indicator {
   position: fixed;
   left: 0;

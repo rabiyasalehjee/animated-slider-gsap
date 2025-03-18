@@ -10,28 +10,28 @@ import img5 from '../assets/img5.jpg';
 
 const data = [
   {
-    place: 'Yellowstone National Park, Wyoming',
+    place: 'Yellowstone National Park',
     title: 'BLACK SAND',
     title2: 'BASIN',
     description: 'Black Sand Basin in Yellowstone National Park, Wyoming, is a stunning geothermal area known for its vibrant hot springs, geysers, and steaming pools. The contrast of dark volcanic sand with the colorful thermal waters creates a mesmerizing landscape.',
     image: img1,
   },
   {
-    place: 'Yosemite National Park, USA',
+    place: 'Yosemite National Park',
     title: 'SENTINEL',
     title2: 'DOME',
     description: 'Sentinel Dome in Yosemite National Park offers breathtaking panoramic views of the surrounding valley, including El Capitan and Half Dome. A relatively short hike rewards visitors with one of the most iconic vistas in the park.',
     image: img2,
   },
   {
-    place: 'Bryce Canyon National Park, USA',
+    place: 'Bryce Canyon National Park',
     title: 'STONE',
     title2: 'GATE',
     description: 'The Stone Gate in Bryce Canyon National Park stands as a natural rock formation, framing the breathtaking hoodoos and red rock amphitheaters that make this park a geological wonder.',
     image: img3,
   },
   {
-    place: 'Durdle Door, Dorset, England',
+    place: 'Durdle Door, Dorset',
     title: 'DURDLE',
     title2: 'DOOR',
     description: 'Durdle Door, a magnificent limestone arch on the Jurassic Coast of Dorset, England, is one of the most photographed and iconic coastal landmarks in the UK. Its scenic beauty and clear blue waters make it a favorite destination for visitors.',
@@ -294,11 +294,6 @@ const Main = () => {
           Black Sand Basin in Yellowstone National Park, Wyoming, is a stunning geothermal area known for its vibrant hot springs, geysers, and steaming pools. The contrast of dark volcanic sand with the colorful thermal waters creates a mesmerizing landscape.
         </div>
         <div className="cta">
-          <button className="bookmark">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-              <path fillRule="evenodd" d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z" clipRule="evenodd" />
-            </svg>
-          </button>
           <button className="discover">Discover Location</button>
         </div>
       </div>
@@ -313,11 +308,6 @@ const Main = () => {
           Black Sand Basin in Yellowstone National Park, Wyoming, is a stunning geothermal area known for its vibrant hot springs, geysers, and steaming pools. The contrast of dark volcanic sand with the colorful thermal waters creates a mesmerizing landscape.
         </div>
         <div className="cta">
-          <button className="bookmark">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-              <path fillRule="evenodd" d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z" clipRule="evenodd" />
-            </svg>
-          </button>
           <button className="discover">Discover Location</button>
         </div>
       </div>
