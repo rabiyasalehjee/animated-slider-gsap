@@ -5,12 +5,17 @@
   --text-color: #FFFFFFDD;
 }
 
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+}
+
+body {
   background-color: #1a1a1a;
   color: var(--text-color);
   position: relative;
-  overflow: hidden;
   font-family: "Inter", sans-serif;
 }
 
@@ -211,16 +216,21 @@ body {
 }
 
 @media (max-width: 768px) {
-  body {
-    height: 100vh; /* Full viewport height */
-  }
-
   .card {
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    width: 100vw; 
+    height: 100vh; 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center center; 
   }
 
   .card-content {
     padding-left: 10px;
+    bottom: 10px;
+    top: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
   }
 
   .content-place {
@@ -239,7 +249,7 @@ body {
   }
 
   .details {
-    top: 10px; /* Closer to top */
+    top: 10px;
     left: 20px;
     width: 90%;
   }
@@ -288,6 +298,8 @@ body {
 
   .pagination {
     width: 90%;
+    top: 85vh;
+    left: 5%;
   }
 
   .pagination > .arrow {
@@ -306,7 +318,7 @@ body {
   }
 
   .pagination .progress-sub-container {
-    width: 40%; /* Smaller progress bar */
+    width: 40%;
     height: 30px;
     margin-left: 12px;
   }

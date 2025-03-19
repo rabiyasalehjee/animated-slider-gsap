@@ -81,26 +81,24 @@ const Main = () => {
       const detailsInactive = detailsEven ? "#details-odd" : "#details-even";
       const { innerHeight: height, innerWidth: width } = window;
 
-      // Mobile adjustments
       if (isMobile()) {
-        offsetTop = height * 0.5; // Cards start at 50% of screen height
-        offsetLeft = width * 0.1; // 10% from left
-        cardWidth = width * 0.25; // Smaller cards (25% of width)
-        cardHeight = height * 0.3; // 30% of height
-        gap = 10; // Reduced gap for mobile
-        numberSize = 30; // Smaller number size for mobile
+        offsetTop = height * 0.5;
+        offsetLeft = width * 0.1;
+        cardWidth = width * 0.25;
+        cardHeight = height * 0.3;
+        gap = 10;
+        numberSize = 30;
 
         gsap.set("#pagination", {
-          top: height * 0.85, // Near bottom of screen
+          top: height * 0.85,
           left: offsetLeft,
           y: 0,
           opacity: 1,
           zIndex: 60,
         });
 
-        gsap.set(detailsActive, { opacity: 0, zIndex: 22, x: -50 }); // Reduced offset for mobile
+        gsap.set(detailsActive, { opacity: 0, zIndex: 22, x: -50 });
       } else {
-        // Original desktop settings
         offsetTop = height - 430;
         offsetLeft = width - 830;
         cardWidth = 200;
