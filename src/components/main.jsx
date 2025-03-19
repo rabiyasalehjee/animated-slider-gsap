@@ -186,9 +186,13 @@ const Main = () => {
 
     let clicks = 0;
 
-    const step = () => {
+    const step = (direction = 'next') => {
       return new Promise((resolve) => {
-        order.push(order.shift());
+        if (direction === 'next') {
+          order.push(order.shift());
+        } else {
+          order.unshift(order.pop());
+        }
         detailsEven = !detailsEven;
 
         const detailsActive = detailsEven ? "#details-even" : "#details-odd";
@@ -242,7 +246,7 @@ const Main = () => {
             gsap.set(`${detailsInactive} .desc`, { y: 50 });
             gsap.set(`${detailsInactive} .cta`, { y: 60 });
             clicks -= 1;
-            if (clicks > 0) step();
+            if (clicks > 0) step(direction);
           },
         });
 
@@ -292,8 +296,18 @@ const Main = () => {
 
     start();
 
+    const handleArrowClick = (direction) => {
+      clicks += 1;
+      step(direction);
+    };
+
+    document.querySelector('.arrow-left').addEventListener('click', () => handleArrowClick('prev'));
+    document.querySelector('.arrow-right').addEventListener('click', () => handleArrowClick('next'));
+
     return () => {
       window.removeEventListener('resize', init);
+      document.querySelector('.arrow-left').removeEventListener('click', () => handleArrowClick('prev'));
+      document.querySelector('.arrow-right').removeEventListener('click', () => handleArrowClick('next'));
     };
   }, []);
 

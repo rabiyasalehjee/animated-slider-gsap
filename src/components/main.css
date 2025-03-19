@@ -152,6 +152,7 @@ body {
   border: 2px solid #ffffff55;
   display: grid;
   place-items: center;
+  cursor: pointer;
 }
 
 .pagination>.arrow:nth-child(2) {
