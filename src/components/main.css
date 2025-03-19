@@ -217,30 +217,27 @@ body {
 
 @media (max-width: 768px) {
   .card {
-    width: 100vw; 
-    height: 100vh; 
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    background-position: center center; 
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 10; 
   }
 
   .card-content {
-    padding-left: 10px;
-    bottom: 10px;
-    top: auto;
-    left: 0;
-    right: 0;
-    text-align: center;
+    position: absolute;
+    text-align: left;
+    z-index: 20;
+    opacity: 1;
   }
-
   .content-place {
-    font-size: 10px;
-    margin-top: 4px;
+    font-size: 12px;
   }
 
   .content-title-1,
   .content-title-2 {
-    font-size: 14px;
+    font-size: 18px; 
   }
 
   .content-start {
@@ -249,7 +246,7 @@ body {
   }
 
   .details {
-    top: 10px;
+    top: 40px;
     left: 20px;
     width: 90%;
   }
