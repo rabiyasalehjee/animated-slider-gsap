@@ -5,7 +5,8 @@
   --text-color: #FFFFFFDD;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -98,19 +99,19 @@ body {
   overflow: hidden;
 }
 
-.details > .desc {
+.details>.desc {
   margin-top: 16px;
   width: 500px;
 }
 
-.details > .cta {
+.details>.cta {
   width: 500px;
   margin-top: 24px;
   display: flex;
   align-items: center;
 }
 
-.details > .cta > .discover {
+.details>.cta>.discover {
   border: 1px solid #ffffff;
   background-color: transparent;
   height: 36px;
@@ -123,7 +124,7 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.details > .cta > .discover:hover {
+.details>.cta>.discover:hover {
   background-color: var(--primary-color);
   color: #1a1a1a;
 }
@@ -143,7 +144,7 @@ body {
   display: inline-flex;
 }
 
-.pagination > .arrow {
+.pagination>.arrow {
   z-index: 60;
   width: 50px;
   height: 50px;
@@ -153,11 +154,11 @@ body {
   place-items: center;
 }
 
-.pagination > .arrow:nth-child(2) {
+.pagination>.arrow:nth-child(2) {
   margin-left: 20px;
 }
 
-.pagination > .arrow svg {
+.pagination>.arrow svg {
   width: 24px;
   height: 24px;
   stroke-width: 2;
@@ -217,27 +218,32 @@ body {
 
 @media (max-width: 768px) {
   .card {
-    width: 100vw;
-    height: 100vh;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    z-index: 10; 
+    z-index: 10;
+    border-radius: 10px;
+    overflow: hidden;
   }
 
   .card-content {
-    position: absolute;
+    left: -10px !important;
+    white-space: nowrap !important;
+    margin-top: -17%;
     text-align: left;
     z-index: 20;
     opacity: 1;
   }
+
   .content-place {
     font-size: 12px;
+    margin-bottom: 8px;
   }
 
   .content-title-1,
   .content-title-2 {
-    font-size: 18px; 
+    font-size: 16px;
+    margin-bottom: 4px;
   }
 
   .content-start {
@@ -275,19 +281,19 @@ body {
     height: 40px;
   }
 
-  .details > .desc {
+  .details>.desc {
     width: 100%;
     font-size: 12px;
     line-height: 1.2;
     margin-top: 8px;
   }
 
-  .details > .cta {
+  .details>.cta {
     width: 100%;
     margin-top: 12px;
   }
 
-  .details > .cta > .discover {
+  .details>.cta>.discover {
     height: 28px;
     font-size: 10px;
     padding: 4px 12px;
@@ -299,17 +305,17 @@ body {
     left: 5%;
   }
 
-  .pagination > .arrow {
+  .pagination>.arrow {
     width: 30px;
     height: 30px;
     border: 1px solid #ffffff55;
   }
 
-  .pagination > .arrow:nth-child(2) {
+  .pagination>.arrow:nth-child(2) {
     margin-left: 10px;
   }
 
-  .pagination > .arrow svg {
+  .pagination>.arrow svg {
     width: 16px;
     height: 16px;
   }

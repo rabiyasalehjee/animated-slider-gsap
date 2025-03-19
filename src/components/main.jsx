@@ -9,35 +9,35 @@ import img5 from '../assets/img5.jpg';
 
 const data = [
   {
-    place: 'Yellowstone National Park',
+    place: 'Yellowstone Park',
     title: 'BLACK SAND',
     title2: 'BASIN',
     description: 'Black Sand Basin in Yellowstone National Park, Wyoming, is a stunning geothermal area known for its vibrant hot springs, geysers, and steaming pools. The contrast of dark volcanic sand with the colorful thermal waters creates a mesmerizing landscape.',
     image: img1,
   },
   {
-    place: 'Yosemite National Park',
+    place: 'Yosemite Park',
     title: 'SENTINEL',
     title2: 'DOME',
     description: 'Sentinel Dome in Yosemite National Park offers breathtaking panoramic views of the surrounding valley, including El Capitan and Half Dome. A relatively short hike rewards visitors with one of the most iconic vistas in the park.',
     image: img2,
   },
   {
-    place: 'Bryce Canyon National Park',
+    place: 'Bryce Canyon Park',
     title: 'STONE',
     title2: 'GATE',
     description: 'The Stone Gate in Bryce Canyon National Park stands as a natural rock formation, framing the breathtaking hoodoos and red rock amphitheaters that make this park a geological wonder.',
     image: img3,
   },
   {
-    place: 'Durdle Door, Dorset',
+    place: 'Dorset, England',
     title: 'DURDLE',
     title2: 'DOOR',
     description: 'Durdle Door, a magnificent limestone arch on the Jurassic Coast of Dorset, England, is one of the most photographed and iconic coastal landmarks in the UK. Its scenic beauty and clear blue waters make it a favorite destination for visitors.',
     image: img4,
   },
   {
-    place: 'Piha Beach, New Zealand',
+    place: 'Piha Beach',
     title: 'LION',
     title2: 'ROCK',
     description: 'Piha Beach, home to the striking Lion Rock, is a rugged black sand beach on New Zealand’s west coast. Popular among surfers and nature lovers, it offers dramatic coastal scenery and a deep cultural significance to the Māori people.',
@@ -83,8 +83,8 @@ const Main = () => {
 
       if (isMobile()) {
         offsetTop = height * 0.5;
-        offsetLeft = width * 0.1;
-        cardWidth = width * 0.25;
+        offsetLeft = width * 0.065;
+        cardWidth = width * 0.37;
         cardHeight = height * 0.3;
         gap = 10;
         numberSize = 30;
